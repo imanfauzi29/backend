@@ -19,6 +19,20 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get("/ping", (req, res) => res.send("PONG"))
 
+if (process.env.NODE_ENV === "development") {
+    app.post("/delete-db/:dbName", async (req, res) => {
+        try {
+            const {dbName} = req.params
+            const collection = await require("mongoose").connection.collection(dbName).drop()
+            if (collection) {
+                res.status(200).send({message: `Success delete database "${dbName}"`})
+            }
+        } catch (error) {
+            res.status(400).send({message: `Error: ${error.message}`})
+        }
+    })
+}
+
 app.use(authRoutes)
 app.use(roleRoutes)
 app.use(studentRoutes)
