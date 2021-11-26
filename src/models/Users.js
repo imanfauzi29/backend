@@ -37,14 +37,15 @@ const userSchema = new Schema(
                 }
             }
         },
+        role: {
+            type: Schema.Types.ObjectId,
+            ref: "role",
+            required: true
+        },
         email_activation: String,
         active: {
             type: Boolean,
             default: true
-        },
-        role: {
-            type: String,
-            required: true
         },
         company: String,
         phone: Number,
