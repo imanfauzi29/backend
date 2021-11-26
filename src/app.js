@@ -1,7 +1,7 @@
 const express = require("express")
 // const bodyParser = require("body-parser")
 const cors = require("cors")
-const { authRoutes, roleRoutes } = require("./routes")
+const { authRoutes, roleRoutes, studentRoutes, gradeRoutes, majorRoutes } = require("./routes")
 const app = express()
 const port = 3001
 
@@ -36,5 +36,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(authRoutes)
 app.use(roleRoutes)
 app.use(studentRoutes)
+app.use(gradeRoutes)
+app.use(majorRoutes)
 
 module.exports = app
