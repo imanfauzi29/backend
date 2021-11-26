@@ -29,12 +29,33 @@ authCtrl.registerUser = async (req, res) => {
         newUser.ip_address = getIp()
         newUser.role = role._id.toString()
         newUser.password = await newUser.encryptPassword(newUser.password)
-        await newUser.save()
+        if (role.role_name === "Murid") {
+            saveStudent(result)
+        }
+        
         res.status(200).send(
             await response.success({ message: "New user has been created!" })
         )
     } catch (error) {
         res.status(400).send(await response.failed({ message: error.message }))
+    }
+}
+
+const saveStudent = async (result) => {
+    try {
+        const student = new Students({ user: result._id })
+        await student.save()
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+const saveGuru = async (result) => {
+    try {
+        const student = new Students({ user: result._id })
+        await student.save()
+    } catch (error) {
+        throw new Error(error)
     }
 }
 
@@ -92,7 +113,7 @@ authCtrl.getAllUser = async (req, res) => {
 authCtrl.deleteUser = async (req, res) => {
     try {
         const { userId } = req.params
-        const user = await User.deleteOne({_id: userId})
+        const user = await User.deleteOne({ _id: userId })
 
         res.status(200).send(
             await response.success({

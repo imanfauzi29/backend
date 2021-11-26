@@ -21,5 +21,6 @@ app.get("/ping", (req, res) => res.send("PONG"))
 
 app.use(authRoutes)
 app.use(roleRoutes)
+app.use(studentRoutes)
 
 module.exports = app
