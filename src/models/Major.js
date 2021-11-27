@@ -6,7 +6,7 @@ const majorSchema = new Schema(
             type: String,
             required: true,
         },
-        major_type: {
+        major_code: {
             type: String,
             required: true,
             minLength: 2,

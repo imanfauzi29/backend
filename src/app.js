@@ -1,7 +1,7 @@
 const express = require("express")
 // const bodyParser = require("body-parser")
 const cors = require("cors")
-const { authRoutes, roleRoutes, studentRoutes, gradeRoutes, majorRoutes } = require("./routes")
+const { authRoutes, roleRoutes, studentRoutes, gradeRoutes, majorRoutes, subjectRoutes } = require("./routes")
 const app = express()
 const port = 3001
 
@@ -38,5 +38,6 @@ app.use(roleRoutes)
 app.use(studentRoutes)
 app.use(gradeRoutes)
 app.use(majorRoutes)
+app.use(subjectRoutes)
 
 module.exports = app

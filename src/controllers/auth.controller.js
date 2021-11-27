@@ -1,7 +1,8 @@
 const User = require("../models/Users")
-const Role = require("../models/Role")
+const Role = require("../models/Roles")
 const response = require("../utils/response")
 const { getIp } = require("../utils/utils")
+const Students = require("../models/Students")
 
 const authCtrl = {}
 
@@ -17,7 +18,6 @@ authCtrl.loginUser = async (req, res) => {
             await response.success({ message: "Login Successful", data })
         )
     } catch (error) {
-        console.log(error)
         res.status(400).send(await response.failed({ message: error.message }))
     }
 }
@@ -25,10 +25,15 @@ authCtrl.loginUser = async (req, res) => {
 authCtrl.registerUser = async (req, res) => {
     const newUser = new User(req.body)
     try {
-        const role = await Role.findOne({role_name: "Murid"})
+        const role = await Role.findOne({ _id: newUser.role })
         newUser.ip_address = getIp()
-        newUser.role = role._id.toString()
         newUser.password = await newUser.encryptPassword(newUser.password)
+        const result = await newUser.save()
+
+        if (role.role_name === "Guru") {
+
+        }
+
         if (role.role_name === "Murid") {
             saveStudent(result)
         }
