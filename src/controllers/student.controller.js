@@ -87,6 +87,24 @@ ctrlStudent.getStudentById = async (req, res) => {
     const { studentId } = req.params
     try {
         const student = await Student.findById(studentId)
+            .populate({
+                path: "user",
+                select: {
+                    first_name: 1,
+                    last_name: 1,
+                    email: 1,
+                    username: 1,
+                    active: 1
+                },
+                populate: {
+                    path: "role",
+                    model: Role,
+                    select: { role_name: 1, _id: 0, active: 1 }
+                }
+            })
+            .populate("grade", { _id: 0, grade_name: 1 })
+            .sort({ field: "asc" })
+            .exec()
 
         res.status(200).send(
             await response.success({
@@ -100,13 +118,14 @@ ctrlStudent.getStudentById = async (req, res) => {
 }
 
 ctrlStudent.deleteStudent = async (req, res) => {
-    const { studentId} = req.params
+    const { studentId } = req.params
     try {
         const student = await Student.findByIdAndDelete(studentId)
         if (student === null) throw new Error("Cant find user")
-        if (Object.keys(student).length < 1) throw new Error("Failed to delete data")
-        
-        const user = await User.deleteOne({_id: student.user})
+        if (Object.keys(student).length < 1)
+            throw new Error("Failed to delete data")
+
+        const user = await User.deleteOne({ _id: student.user })
 
         if (user.deletedCount > 0) {
             res.status(200).send(
