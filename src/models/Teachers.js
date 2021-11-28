@@ -13,6 +13,10 @@ const teacherSchema = new Schema(
             maxlength: 1,
             default: ""
         },
+        active: {
+            type: Boolean,
+            default: true
+        },
         subject: [{ type: Schema.Types.ObjectId, ref: "Subject" }]
     },
     {

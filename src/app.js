@@ -8,7 +8,8 @@ const {
     gradeRoutes,
     majorRoutes,
     subjectRoutes,
-    teacherRoutes
+    teacherRoutes,
+    questRoutes
 } = require("./routes")
 const app = express()
 const port = 3001
@@ -50,5 +51,6 @@ app.use(gradeRoutes)
 app.use(majorRoutes)
 app.use(subjectRoutes)
 app.use(teacherRoutes)
+app.use(questRoutes)
 
 module.exports = app

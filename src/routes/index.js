@@ -5,6 +5,7 @@ const gradeRoutes = require("./grade.routes")
 const majorRoutes = require("./major.routes")
 const subjectRoutes = require("./subject.routes")
 const teacherRoutes = require("./teacher.routes")
+const questRoutes = require("./quest.routes")
 
 module.exports = {
     authRoutes,
@@ -13,5 +14,6 @@ module.exports = {
     gradeRoutes,
     majorRoutes,
     subjectRoutes,
-    teacherRoutes
+    teacherRoutes,
+    questRoutes
 }
