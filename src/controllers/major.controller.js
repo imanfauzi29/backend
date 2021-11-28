@@ -1,4 +1,4 @@
-const Major = require("../models/Major")
+const Majors = require("../models/Majors")
 const response = require("../utils/response")
 
 const majorCtrl = {}
@@ -8,7 +8,7 @@ majorCtrl.addMajor = async (req, res) => {
     const body = req.body
 
     try {
-        const major = await new Major(body)
+        const major = await new Majors(body)
         const data = await major.save()
 
         res.status(200).send(
@@ -32,7 +32,7 @@ majorCtrl.updateMajor = async (req, res) => {
     const body = req.body
 
     try {
-        const major = await Major.findByIdAndUpdate(majorId, body)
+        const major = await Majors.findByIdAndUpdate(majorId, body)
         res.status(200).send(
             await response.success({
                 message: "Success update data!",
@@ -47,7 +47,7 @@ majorCtrl.updateMajor = async (req, res) => {
 // Get major
 majorCtrl.getMajor = async (req, res) => {
     try {
-        const major = await Major.find()
+        const major = await Majors.find()
 
         res.status(200).send(
             await response.success({
@@ -68,7 +68,7 @@ majorCtrl.getMajorById = async (req, res) => {
     const { majorId } = req.params
 
     try {
-        const major = await Major.findById({_id: majorId})
+        const major = await Majors.findById({_id: majorId})
 
         res.status(200).send(
             await response.success({
@@ -89,7 +89,7 @@ majorCtrl.deleteMajor = async (req, res) => {
     const { majorId } = req.params
 
     try {
-        const major = await Major.deleteOne({_id: majorId})
+        const major = await Majors.deleteOne({_id: majorId})
         if (major.deletedCount < 1) throw new Error("Failed to delete data")
 
         res.status(200).send(

@@ -23,7 +23,7 @@ const majorSchema = new Schema(
     }
 )
 
-const Major = model("Major", majorSchema)
+const Majors = model("Major", majorSchema)
 
-module.exports = Major
+module.exports = Majors
 

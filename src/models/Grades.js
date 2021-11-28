@@ -21,7 +21,7 @@ const gradeSchema = new Schema(
     }
 )
 
-const Grade = model("Grade", gradeSchema)
+const Grades = model("Grade", gradeSchema)
 
-module.exports = Grade
+module.exports = Grades
 

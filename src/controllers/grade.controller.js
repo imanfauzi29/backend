@@ -1,4 +1,4 @@
-const Grade = require("../models/Grade")
+const Grades = require("../models/Grades")
 const response = require("../utils/response")
 
 const gradeCtrl = {}
@@ -8,7 +8,7 @@ gradeCtrl.addGrade = async (req, res) => {
     const body = req.body
 
     try {
-        const grade = new Grade(body)
+        const grade = new Grades(body)
         const data = grade.save()
 
         res.status(200).send(
@@ -32,7 +32,7 @@ gradeCtrl.updateGrade = async (req, res) => {
     const body = req.body
 
     try {
-        const grade = await Grade.findOneAndUpdate({ _id: grade_id }, body)
+        const grade = await Grades.findOneAndUpdate({ _id: grade_id }, body)
         res.status(200).send(
             await response.success({
                 message: "Success update data",
@@ -47,7 +47,7 @@ gradeCtrl.updateGrade = async (req, res) => {
 // Get grade
 gradeCtrl.getGrade = async (req, res) => {
     try {
-        const grade = await Grade.find()
+        const grade = await Grades.find()
             .populate({
                 path: "major",
                 match: { active: true },
@@ -78,7 +78,7 @@ gradeCtrl.getGradeById = async (req, res) => {
     const { gradeId } = req.params
 
     try {
-        const grade = await Grade.findById(gradeId)
+        const grade = await Grades.findById(gradeId)
             .populate({
                 path: "major",
                 match: { active: true },
@@ -106,7 +106,7 @@ gradeCtrl.deleteGrade = async (req, res) => {
     const { gradeId } = req.params
 
     try {
-        const grade = await Grade.deleteOne({ _id: gradeId })
+        const grade = await Grades.deleteOne({ _id: gradeId })
         if (grade.deletedCount < 1) throw new Error("Failed delete data")
 
         res.status(200).send(

@@ -22,6 +22,6 @@ const studentSchema = new Schema(
 
 
 
-const Students = model("Students", studentSchema)
+const Students = model("Student", studentSchema)
 
 module.exports = Students

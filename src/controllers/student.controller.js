@@ -130,7 +130,7 @@ ctrlStudent.deleteStudent = async (req, res) => {
         if (user.deletedCount > 0) {
             res.status(200).send(
                 await response.success({
-                    message: "Success retrive data",
+                    message: "Success delete data",
                     data: user
                 })
             )

@@ -3,6 +3,7 @@ const Role = require("../models/Roles")
 const response = require("../utils/response")
 const { getIp } = require("../utils/utils")
 const Students = require("../models/Students")
+const Teachers = require("../models/Teachers")
 
 const authCtrl = {}
 
@@ -31,7 +32,7 @@ authCtrl.registerUser = async (req, res) => {
         const result = await newUser.save()
 
         if (role.role_name === "Guru") {
-
+            saveTeacher(result)
         }
 
         if (role.role_name === "Murid") {
@@ -55,10 +56,10 @@ const saveStudent = async (result) => {
     }
 }
 
-const saveGuru = async (result) => {
+const saveTeacher = async (result) => {
     try {
-        const student = new Students({ user: result._id })
-        await student.save()
+        const teacher = new Teachers({ user: result._id })
+        await teacher.save()
     } catch (error) {
         throw new Error(error)
     }

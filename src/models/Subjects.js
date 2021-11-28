@@ -23,7 +23,7 @@ const subjectSchema = new Schema(
     }
 )
 
-const Subject = model("Subject", subjectSchema)
+const Subjects = model("Subject", subjectSchema)
 
-module.exports = Subject
+module.exports = Subjects
 

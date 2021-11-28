@@ -1,14 +1,14 @@
-const Subject = require("../models/Subject")
+const Subjects = require("../models/Subjects")
 const response = require("../utils/response")
 
 const subjectCtrl = {}
 
-// Add Subject
+// Add Subjects
 subjectCtrl.addSubject = async (req, res) => {
     const body = req.body
 
     try {
-        const subject = await new Subject(body)
+        const subject = await new Subjects(body)
         const data = await subject.save()
 
         res.status(200).send(
@@ -23,7 +23,7 @@ subjectCtrl.addSubject = async (req, res) => {
 }
 
 /** 
-/* Update Subject by id
+/* Update Subjects by id
 /* params :subjectId
 /* body {}
 */
@@ -32,7 +32,7 @@ subjectCtrl.updateSubject = async (req, res) => {
     const body = req.body
 
     try {
-        const subject = await Subject.findOneAndUpdate({ _id: subjectId }, body, {returnOriginal: false})
+        const subject = await Subjects.findOneAndUpdate({ _id: subjectId }, body, {returnOriginal: false})
         res.status(200).send(
             await response.success({
                 message: "Success update data!",
@@ -44,10 +44,10 @@ subjectCtrl.updateSubject = async (req, res) => {
     }
 }
 
-// Get Subject
+// Get Subjects
 subjectCtrl.getSubject = async (req, res) => {
     try {
-        const subject = await Subject.find()
+        const subject = await Subjects.find()
 
         res.status(200).send(
             await response.success({
@@ -61,14 +61,14 @@ subjectCtrl.getSubject = async (req, res) => {
 }
 
 /** 
-/* Get Subject by id
+/* Get Subjects by id
 /* params :subjectId
 */
 subjectCtrl.getSubjectById = async (req, res) => {
     const { subjectId } = req.params
 
     try {
-        const subject = await Subject.findById(subjectId)
+        const subject = await Subjects.findById(subjectId)
         res.status(200).send(
             await response.success({
                 message: "Success retrive data!",
@@ -81,14 +81,14 @@ subjectCtrl.getSubjectById = async (req, res) => {
 }
 
 /** 
-/* Delete Subject
+/* Delete Subjects
 /* params :subjectId
 */
 subjectCtrl.deleteSubject = async (req, res) => {
     const { subjectId } = req.params
 
     try {
-        const subject = await Subject.findOneAndDelete({ _id: subjectId })
+        const subject = await Subjects.findOneAndDelete({ _id: subjectId })
 
         res.status(200).send(
             await response.success({
