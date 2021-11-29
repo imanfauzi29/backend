@@ -1,7 +1,10 @@
 const administrator = async (req, res, next) => {
     try {
         const { require_token } = req.headers
-        const [adm, date] = atob(require_token).split("|")
+        const [adm, date] = Buffer.from(
+            require_token, "base64"
+          ).toString("utf8").split("|")
+
         if (adm !== "administrator")
             throw new Error("Cant access to this endpoint!")
 
