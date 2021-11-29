@@ -137,7 +137,8 @@ questCtrl.deleteQuest = async (req, res) => {
 
         res.status(200).send(
             await response.success({
-                message: "Success delete data"
+                message: "Success delete data",
+                data: quest
             })
         )
     } catch (error) {

@@ -38,7 +38,7 @@ authCtrl.registerUser = async (req, res) => {
         if (role.role_name === "Murid") {
             saveStudent(result)
         }
-        
+
         res.status(200).send(
             await response.success({ message: "New user has been created!" })
         )
@@ -125,6 +125,24 @@ authCtrl.deleteUser = async (req, res) => {
             await response.success({
                 message: "Success delete data",
                 data: user
+            })
+        )
+    } catch (error) {
+        res.status(400).send(await response.failed({ message: error.message }))
+    }
+}
+
+authCtrl.registerAdminUser = async (req, res) => {
+    const newUser = new User(req.body)
+    try {
+        newUser.ip_address = getIp()
+        newUser.password = await newUser.encryptPassword(newUser.password)
+        const result = await newUser.save()
+
+        res.status(200).send(
+            await response.success({
+                message: "New user has been created!",
+                data: result
             })
         )
     } catch (error) {
