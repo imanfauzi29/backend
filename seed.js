@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const path = require("path")
 const { getIp } = require("./src/utils/utils")
+const bcrypt = require("bcryptjs")
 
 const db = process.env.MONGODB_URI
     ? process.env.MONGODB_URI
@@ -22,7 +23,7 @@ const data = [
             ip_address: getIp(),
             last_name: "Fauzi",
             username: "admin",
-            password: "admin123",
+            password: bcrypt.hash("myFirstDatabase", 8),
             role: "619c8cd737bf5cb7771caacb",
             email: "admin@gmail.com",
             active: true
