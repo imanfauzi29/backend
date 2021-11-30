@@ -36,16 +36,28 @@ const seed = () => {
 
         data.forEach((d) => {
             const Model = require(path.resolve(`./src/models/${d._model}`))
-            mongoose.connection.db.dropCollection(d._model.toLocaleLowerCase(), (err, result) => {
-                if (err) throw new Error(`failed to drop collection: ${err}`)
-                
-                const newModel = new Model(d.document)
-                newModel.save(err => {
-                    if (err) throw new Error(err.message)
-                    console.log(`${d._model} success seed!`);
-                    mongoose.connection.close()
+            mongoose.connection.db
+                .listCollections({ name: d._model.toLocaleLowerCase() })
+                .next((err, info) => {
+                    if (info !== null) {
+                        mongoose.connection.db.dropCollection(
+                            d._model.toLocaleLowerCase(),
+                            (err, result) => {
+                                if (err)
+                                    throw new Error(
+                                        `failed to drop collection: ${err}`
+                                    )
+                            }
+                        )
+                    }
+
+                    const newModel = new Model(d.document)
+                    newModel.save((err) => {
+                        if (err) throw new Error(err.message)
+                        console.log(`${d._model} success seed!`)
+                        mongoose.connection.close()
+                    })
                 })
-            })
         })
 
         return
