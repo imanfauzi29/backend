@@ -23,7 +23,7 @@ const data = [
             ip_address: getIp(),
             last_name: "Fauzi",
             username: "admin",
-            password: bcrypt.hash("myFirstDatabase", 8),
+            password: "$2a$08$ju15nUbTshdsE3P2Ogwf5uZHo3Z8K9dEEVzI2N82yimDxQ8A1IsVW",
             role: "619c8cd737bf5cb7771caacb",
             email: "admin@gmail.com",
             active: true
