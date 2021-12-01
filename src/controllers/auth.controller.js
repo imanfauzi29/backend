@@ -13,7 +13,7 @@ authCtrl.loginUser = async (req, res) => {
         const user = await User.findByCredentials(username, password)
         const token = await user.generateAuthToken()
 
-        const data = { token }
+        const data = { user, token }
 
         res.status(200).send(
             await response.success({ message: "Login Successful", data })
