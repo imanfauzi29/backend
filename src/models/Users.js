@@ -68,7 +68,14 @@ userSchema.statics.findByCredentials = async (username, password) => {
     if (user) {
         const isMatch = await bcrypt.compare(password, user.password)
         if (isMatch) {
-            return await User.findOne({username}).select("-password -tokens")
+            return await User.findOne({ username })
+                .select("-password -tokens")
+                .populate({
+                    path: "role",
+                    model: "Role",
+                    select: { role_name: 1, _id: 0 },
+                    match: {active: 1}
+                })
         }
         throw new Error("unable to login!")
     } else {
