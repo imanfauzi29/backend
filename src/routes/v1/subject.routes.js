@@ -6,8 +6,8 @@ const {
     getSubject,
     getSubjectById,
     deleteSubject
-} = require("../controllers/subject.controller")
-const auth = require("../middlewares/auth")
+} = require("../../controllers/v1/subject.controller")
+const auth = require("../../middlewares/auth")
 
 router.post("/subject", auth, addSubject)
 router.get("/subject", auth, getSubject)

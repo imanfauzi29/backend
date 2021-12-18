@@ -5,8 +5,8 @@ const {
     getTeacher,
     getTeacherById,
     deleteTeacher
-} = require("../controllers/teacher.controller")
-const auth = require("../middlewares/auth")
+} = require("../../controllers/v1/teacher.controller")
+const auth = require("../../middlewares/auth")
 
 router.get("/teacher", auth, getTeacher)
 router.get("/teacher/:teacherId", auth, getTeacherById)

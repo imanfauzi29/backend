@@ -1,6 +1,6 @@
-const Subjects = require("../models/Subjects")
-const Teachers = require("../models/Teachers")
-const response = require("../utils/response")
+const Subjects = require("../../models/Subjects")
+const Teachers = require("../../models/Teachers")
+const response = require("../../utils/response")
 
 const teacherCtrl = {}
 

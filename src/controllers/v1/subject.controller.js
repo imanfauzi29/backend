@@ -1,19 +1,19 @@
-const Majors = require("../models/Majors")
-const response = require("../utils/response")
+const Subjects = require("../../models/Subjects")
+const response = require("../../utils/response")
 
-const majorCtrl = {}
+const subjectCtrl = {}
 
-// Add major
-majorCtrl.addMajor = async (req, res) => {
+// Add Subjects
+subjectCtrl.addSubject = async (req, res) => {
     const body = req.body
 
     try {
-        const major = await new Majors(body)
-        const data = await major.save()
+        const subject = await new Subjects(body)
+        const data = await subject.save()
 
         res.status(200).send(
             await response.success({
-                message: "New major has been created!",
+                message: "New subject has been created!",
                 data
             })
         )
@@ -23,20 +23,20 @@ majorCtrl.addMajor = async (req, res) => {
 }
 
 /** 
-/* Update major by id
-/* params :majorId
+/* Update Subjects by id
+/* params :subjectId
 /* body {}
 */
-majorCtrl.updateMajor = async (req, res) => {
-    const { majorId } = req.params
+subjectCtrl.updateSubject = async (req, res) => {
+    const { subjectId } = req.params
     const body = req.body
 
     try {
-        const major = await Majors.findByIdAndUpdate(majorId, body)
+        const subject = await Subjects.findOneAndUpdate({ _id: subjectId }, body, {returnOriginal: false})
         res.status(200).send(
             await response.success({
                 message: "Success update data!",
-                data: major
+                data: subject
             })
         )
     } catch (error) {
@@ -44,15 +44,15 @@ majorCtrl.updateMajor = async (req, res) => {
     }
 }
 
-// Get major
-majorCtrl.getMajor = async (req, res) => {
+// Get Subjects
+subjectCtrl.getSubject = async (req, res) => {
     try {
-        const major = await Majors.find()
+        const subject = await Subjects.find()
 
         res.status(200).send(
             await response.success({
                 message: "Success retrive data!",
-                data: major
+                data: subject
             })
         )
     } catch (error) {
@@ -61,19 +61,18 @@ majorCtrl.getMajor = async (req, res) => {
 }
 
 /** 
-/* Get major by id
-/* params :majorId
+/* Get Subjects by id
+/* params :subjectId
 */
-majorCtrl.getMajorById = async (req, res) => {
-    const { majorId } = req.params
+subjectCtrl.getSubjectById = async (req, res) => {
+    const { subjectId } = req.params
 
     try {
-        const major = await Majors.findById({_id: majorId})
-
+        const subject = await Subjects.findById(subjectId)
         res.status(200).send(
             await response.success({
                 message: "Success retrive data!",
-                data: major
+                data: subject
             })
         )
     } catch (error) {
@@ -82,20 +81,19 @@ majorCtrl.getMajorById = async (req, res) => {
 }
 
 /** 
-/* Delete major
-/* params :majorId
+/* Delete Subjects
+/* params :subjectId
 */
-majorCtrl.deleteMajor = async (req, res) => {
-    const { majorId } = req.params
+subjectCtrl.deleteSubject = async (req, res) => {
+    const { subjectId } = req.params
 
     try {
-        const major = await Majors.deleteOne({_id: majorId})
-        if (major.deletedCount < 1) throw new Error("Failed to delete data")
+        const subject = await Subjects.findOneAndDelete({ _id: subjectId })
 
         res.status(200).send(
             await response.success({
-                message: "Success retrive data!",
-                data: major
+                message: "Success delete data!",
+                data: subject
             })
         )
     } catch (error) {
@@ -103,4 +101,4 @@ majorCtrl.deleteMajor = async (req, res) => {
     }
 }
 
-module.exports = majorCtrl
+module.exports = subjectCtrl

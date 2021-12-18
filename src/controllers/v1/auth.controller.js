@@ -1,9 +1,9 @@
-const User = require("../models/Users")
-const Role = require("../models/Roles")
-const response = require("../utils/response")
-const { getIp } = require("../utils/utils")
-const Students = require("../models/Students")
-const Teachers = require("../models/Teachers")
+const User = require("../../models/Users")
+const Role = require("../../models/Roles")
+const response = require("../../utils/response")
+const { getIp } = require("../../utils/utils")
+const Students = require("../../models/Students")
+const Teachers = require("../../models/Teachers")
 
 const authCtrl = {}
 

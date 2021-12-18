@@ -1,7 +1,7 @@
-const Role = require("../models/Roles")
-const Student = require("../models/Students")
-const User = require("../models/Users")
-const response = require("../utils/response")
+const Role = require("../../models/Roles")
+const Student = require("../../models/Students")
+const User = require("../../models/Users")
+const response = require("../../utils/response")
 
 const ctrlStudent = {}
 

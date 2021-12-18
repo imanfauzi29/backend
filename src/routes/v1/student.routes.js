@@ -1,12 +1,12 @@
 const { Router } = require("express")
 const router = Router()
-const auth = require("../middlewares/auth")
+const auth = require("../../middlewares/auth")
 const {
     updateStudent,
     getStudent,
     getStudentById,
     deleteStudent
-} = require("../controllers/student.controller")
+} = require("../../controllers/v1/student.controller")
 
 router.put("/student/:studentId/update", auth, updateStudent)
 router.get("/student", auth, getStudent)
