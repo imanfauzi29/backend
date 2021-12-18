@@ -1,5 +1,5 @@
-const Role = require("../models/Roles")
-const response = require("../utils/response")
+const Role = require("../../models/Roles")
+const response = require("../../utils/response")
 
 const roleCtrl = {}
 

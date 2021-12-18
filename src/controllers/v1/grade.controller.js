@@ -1,5 +1,5 @@
-const Grades = require("../models/Grades")
-const response = require("../utils/response")
+const Grades = require("../../models/Grades")
+const response = require("../../utils/response")
 
 const gradeCtrl = {}
 

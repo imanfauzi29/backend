@@ -1,6 +1,6 @@
-const Quest = require("../models/Quest")
-const User = require("../models/Users")
-const response = require("../utils/response")
+const Quest = require("../../models/Quest")
+const User = require("../../models/Users")
+const response = require("../../utils/response")
 
 const questCtrl = {}
 

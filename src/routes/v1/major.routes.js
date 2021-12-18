@@ -6,8 +6,8 @@ const {
     getMajor,
     getMajorById,
     deleteMajor
-} = require("../controllers/major.controller")
-const auth = require("../middlewares/auth")
+} = require("../../controllers/v1/major.controller")
+const auth = require("../../middlewares/auth")
 
 router.post("/major", auth, addMajor)
 router.get("/major", auth, getMajor)

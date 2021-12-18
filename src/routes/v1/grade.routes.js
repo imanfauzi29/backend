@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const router = Router()
-const { addGrade, updateGrade, getGrade, getGradeById, deleteGrade } = require("../controllers/grade.controller")
+const { addGrade, updateGrade, getGrade, getGradeById, deleteGrade } = require("../../controllers/v1/grade.controller")
 
 router.post("/grade", addGrade)
 router.get("/grade", getGrade)

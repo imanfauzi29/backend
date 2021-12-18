@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const router = Router()
-const auth = require("../middlewares/auth")
-const { addRole, updateRole, getAllRole, getRoleById, deleteRole } = require("../controllers/role.controller")
+const auth = require("../../middlewares/auth")
+const { addRole, updateRole, getAllRole, getRoleById, deleteRole } = require("../../controllers/v1/role.controller")
 
 router.post("/role", auth, addRole)
 router.get("/role", auth, getAllRole)

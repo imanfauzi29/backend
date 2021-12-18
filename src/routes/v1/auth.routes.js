@@ -8,9 +8,9 @@ const {
     getUserById,
     deleteUser,
     registerAdminUser
-} = require("../controllers/auth.controller")
-const auth = require("../middlewares/auth")
-const administrator = require("../middlewares/administrator")
+} = require("../../controllers/v1/auth.controller")
+const auth = require("../../middlewares/auth")
+const administrator = require("../../middlewares/administrator")
 
 router.post("/auth/login", loginUser)
 router.post("/auth/register", registerUser)
