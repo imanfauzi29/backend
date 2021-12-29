@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const validator = require("validator")
+const mongoosePaginate = require("mongoose-paginate-v2")
 
 const userSchema = new Schema(
     {
@@ -111,6 +112,8 @@ userSchema.methods.toJSON = function () {
 
     return userObject
 }
+
+userSchema.plugin(require("mongoose-paginate-v2"))
 
 const User = model("User", userSchema)
 

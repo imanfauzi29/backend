@@ -23,6 +23,8 @@ const majorSchema = new Schema(
     }
 )
 
+majorSchema.plugin(require("mongoose-paginate-v2"))
+
 const Majors = model("Major", majorSchema)
 
 module.exports = Majors

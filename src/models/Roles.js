@@ -16,6 +16,8 @@ const roleSchema = new Schema(
     }
 )
 
+roleSchema.plugin(require("mongoose-paginate-v2"))
+
 const Role = model("Role", roleSchema)
 
 module.exports = Role

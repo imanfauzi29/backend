@@ -32,5 +32,7 @@ teacherSchema.methods.toObjectId = async (array) => {
     })
 }
 
+teacherSchema.plugin(require("mongoose-paginate-v2"))
+
 const Teachers = model("Teacher", teacherSchema)
 module.exports = Teachers

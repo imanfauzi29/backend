@@ -20,7 +20,7 @@ const studentSchema = new Schema(
     }
 )
 
-
+studentSchema.plugin(require("mongoose-paginate-v2"))
 
 const Students = model("Student", studentSchema)
 

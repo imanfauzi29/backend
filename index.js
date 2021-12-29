@@ -1,6 +1,6 @@
 require('dotenv').config()
 const app = require("./src/app")
-require("./src/db/database")
+require("./src/config/database")
 
 async function main() {
     await app.listen(app.get("port"))
