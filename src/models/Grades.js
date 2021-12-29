@@ -21,6 +21,8 @@ const gradeSchema = new Schema(
     }
 )
 
+gradeSchema.plugin(require("mongoose-paginate-v2"))
+
 const Grades = model("Grade", gradeSchema)
 
 module.exports = Grades

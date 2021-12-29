@@ -23,6 +23,8 @@ const subjectSchema = new Schema(
     }
 )
 
+subjectSchema.plugin(require("mongoose-paginate-v2"))
+
 const Subjects = model("Subject", subjectSchema)
 
 module.exports = Subjects

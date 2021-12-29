@@ -12,7 +12,7 @@ const {
     questRoutes
 } = require("./routes/v1");
 const app = express();
-const port = 3001;
+const port = 3002;
 
 app.set("port", process.env.PORT || port);
 

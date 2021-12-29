@@ -1,6 +1,6 @@
 const response = {}
 
-response.success = async ({ message = "", data = [] }) => {
+response.success =  ({ message = "", data = [] }) => {
     const count = typeof data !== "object" ? data.length : data !== null ? 1 : 0
     const initial = {
         code: 200,
@@ -13,7 +13,25 @@ response.success = async ({ message = "", data = [] }) => {
     return initial
 }
 
-response.failed = async ({ message = "" }) => {
+response.withPaginate = ({message = "", result = {}}) => {
+    const paginate = {
+        code: 200,
+        is_success: true,
+        message,
+        pagination: {
+            total_records: result.totalDocs,
+            total_page: result.totalPages,
+            page: result.page > 0 ? 1 : result.page,
+            offset: result.offset,
+            limit: result.limit
+        },
+        data: result.docs,
+    }
+
+    return paginate
+}
+
+response.failed =  ({ message = "" }) => {
     const initial = {
         code: 400,
         is_success: false,

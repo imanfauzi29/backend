@@ -31,6 +31,8 @@ const questSchema = new Schema(
     }
 )
 
+questSchema.plugin(require("mongoose-paginate-v2"))
+
 const Quest = model("Quest", questSchema)
 
 module.exports = Quest
