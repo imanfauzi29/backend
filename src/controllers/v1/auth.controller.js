@@ -29,6 +29,7 @@ authCtrl.registerUser = async (req, res) => {
   const newUser = new User(req.body);
   try {
     const role = await Role.findOne({ _id: newUser.role });
+    newUser.fullname = `${newUser.first_name} ${newUser.last_name}`;
     newUser.ip_address = getIp();
     newUser.password = await newUser.encryptPassword(newUser.password);
     const result = await newUser.save();
@@ -73,6 +74,7 @@ authCtrl.updateUser = async (req, res) => {
 
   try {
     body.ip_address = getIp();
+    body.fullname = `${body.first_name} ${body.last_name}`
     const user = await User.findByIdAndUpdate({ _id: userId }, body, {
       returnOriginal: false
     }).select("-password -tokens");
@@ -113,22 +115,28 @@ authCtrl.getAllUser = async (req, res) => {
       offset,
       startDate,
       endDate,
-      select: {password: 0, tokens: 0},
+      populate: {
+        path: "role",
+        model: Role,
+        match: {active: 1},
+        select: { role_name: 1, _id: 1 }
+      },
+      select: { password: 0, tokens: 0 },
       sort: { createdAt: !sort ? sort : "asc" }
     };
 
-    const query = {}
+    const query = {};
 
     if (startDate !== undefined) {
-        var gte = new Date(new Date(startDate).setHours(00, 00, 00))
-        var lte = new Date(new Date(!endDate ? startDate : endDate).setHours(23, 59, 59))
-        query["created_at"] = {$gte: gte, $lt: lte}
+      var gte = new Date(new Date(startDate).setHours(00, 00, 00));
+      var lte = new Date(
+        new Date(!endDate ? startDate : endDate).setHours(23, 59, 59)
+      );
+      query["created_at"] = { $gte: gte, $lt: lte };
     }
 
-    const user = await User.paginate(query,
-      options,
-      (err, result) =>
-        response.withPaginate({ message: "Success retrive data", result })
+    const user = await User.paginate(query, options, (err, result) =>
+      response.withPaginate({ message: "Success retrive data", result })
     );
     res.status(200).send(user);
   } catch (error) {
