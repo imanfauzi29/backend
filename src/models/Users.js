@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const validator = require("validator")
-const mongoosePaginate = require("mongoose-paginate-v2")
 
 const userSchema = new Schema(
     {
@@ -11,6 +10,7 @@ const userSchema = new Schema(
             required: true,
             trim: true
         },
+        fullname: String,
         first_name: String,
         last_name: String,
         username: {
@@ -48,8 +48,14 @@ const userSchema = new Schema(
             type: Boolean,
             default: true
         },
-        company: String,
-        phone: Number,
+        company: {
+            type: String,
+            default: ""
+        },
+        phone: {
+            type: Number,
+            default: ""
+        },
         tokens: [
             {
                 token: {
